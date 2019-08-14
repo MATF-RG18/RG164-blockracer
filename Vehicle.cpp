@@ -25,8 +25,8 @@ float Vehicle::getY() {
 // Metod za pomeranje vozila u levo ili desno
 void Vehicle::move(Direction d, float delta) {
     if (d == Right_direction) 
-        x -= delta;
-    else 
         x += delta;
-    std::cout << "X is: " << getX() << std::endl;
+    else 
+        x -= delta;
+    //std::cout << "X is: " << getX() << std::endl;
 }
