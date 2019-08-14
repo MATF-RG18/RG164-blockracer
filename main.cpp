@@ -5,6 +5,8 @@
 #include <iostream>
 #include <GL/glut.h>
 
+#include "Grid.h"
+#include "Vehicle.h"
 
 void on_display(void);
 void on_reshape(int width, int height);
@@ -13,7 +15,8 @@ void on_keyboard(unsigned char key, int x, int y);
 /* Dimenzije prozora */
 int window_width, window_height;
 
-using namespace std;
+Vehicle yugo = Vehicle(0, 0);
+Grid mreza = Grid(100, 100);
 
 int main(int argc, char** argv)
 {
@@ -23,7 +26,7 @@ int main(int argc, char** argv)
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 
     /* Kreira se prozor. */
-    glutInitWindowSize(500, 500);
+    glutInitWindowSize(768, 432);
     glutInitWindowPosition(100, 100);
     glutCreateWindow("BlockRacer");
 
@@ -36,7 +39,7 @@ int main(int argc, char** argv)
 
 
     /* Obavlja se OpenGL inicijalizacija. */
-    glClearColor(0.75, 0.75, 0.75, 0);
+    glClearColor(0, 0, 0, 0);
     //
     glEnable(GL_DEPTH_TEST);
     glShadeModel(GL_SMOOTH);
@@ -62,62 +65,21 @@ void on_display(void)
     gluPerspective(
         80,
         window_width / (float)window_height,
-        1, 50);
+        1, 30);
 
     /* Podesava se tacka pogleda. */
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(
-        0, 3, 4,
-        0, 0.5, 0,
+        0, 3, 2,
+        0, 0.5, -5,
         0, 1, 0
     );
 
 
-    int rep_x = 100;
-    int rep_z = 100;
-    // Postavljamo debljinu linija
-    glLineWidth(1);
-    // Postavljamo boju linija
-    glColor3f(1.0, 0.4, 0.4);
-    // Iskljucujemo sencenje
-    glDisable(GL_LIGHTING);
+    mreza.draw();
+    yugo.draw();
 
-    glPushMatrix();
-    // Transliramo mrezu da bi centar mreze bio u centru koord sistema
-    glTranslatef(-rep_x / 2.0, 0, -rep_z / 2.0);
-
-    int i = 0;
-    // Crtamo linije paralelne sa x-osom
-    for (i = 0; i <= rep_x; i++) {
-        // Postavljamo opciju za crtanje linija
-        glBegin(GL_LINES);
-        // Crtamo pocetnu tacku
-        glVertex3f(0, 0, i);
-        // Crtamo krajnju tacku
-        glVertex3f(rep_x, 0, i);
-        glEnd();
-    }
-
-    // Crtamo linije paralelne sa z-osom
-    for (i = 0; i <= rep_z; i++) {
-        // Postavljamo opciju za crtanje linija
-        glBegin(GL_LINES);
-        // Crtamo pocetnu tacku
-        glVertex3f(i, 0, 0);
-        // Crtamo krajnju tacku
-        glVertex3f(i, 0, rep_z);
-        glEnd();
-    }
-    glPopMatrix();
-    /*
-     * Kreira se kocka i primenjuje se geometrijska transformacija na
-     * istu.
-     */
-    glColor3f(0, 0, 1);
-    glTranslatef(0, 1, 0);
-    glScalef(1, 2, 1);
-    glutSolidCube(1);
     glutSwapBuffers();
 }
 
@@ -139,6 +101,18 @@ void on_keyboard(unsigned char key, int x, int y)
     switch (key) {
     case 27:
         exit(0);
+        break;
+    case 'a':
+    case 'A':
+    case 75:
+        yugo.move(Right_direction, 0.1);
+        glutPostRedisplay();
+        break;
+    case 'd':
+    case 'D':
+    case 77:
+        yugo.move(Left_direction, 0.1);
+        glutPostRedisplay();
         break;
     }
 }
