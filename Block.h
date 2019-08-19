@@ -5,19 +5,24 @@
 
 #include <GL/glut.h>
 #include <iostream>
+#include <random>
 
 class Block {
 private:
     float x;
     float y;
-    float distance_travelled;
+    const float column_x[3] = {-2.5, 0, 2.5};
+    static float speed;
+    static int generate_random_index();
 
 public:
-    Block(int pos_x = 0, int pos_y = 10, float dist = 0);
+    Block(int pos_y = 10);
+    Block(int pos_x, int pos_y);
     float getX();
     float getY();
+    static float getSpeed();
     void draw();
-    void move(float delta);
+    void move(float delta_time);
 };
 
 #endif

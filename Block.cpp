@@ -1,6 +1,9 @@
 #include "Block.h"
 
-Block::Block(int pos_x, int pos_y, float dist) : x(pos_x), y(pos_y), distance_travelled(dist) {};
+Block::Block(int pos_y) : y(pos_y) {
+    x = column_x[generate_random_index()];
+};
+Block::Block(int pos_x, int pos_y) : x(pos_x), y(pos_y) {};
 
 // Metod za iscrtavanje vozila
 void Block::draw() {
@@ -22,9 +25,21 @@ float Block::getY() {
     return y;
 }
 
+float Block::getSpeed() {
+    return speed;
+}
+
 // Metod za pomeranje vozila u levo ili desno
-void Block::move(float delta) {
-        y -= delta;
-        distance_travelled += delta;
+void Block::move(float delta_time) {
+    y -= speed * delta_time;
+    // if y < -1 delete object or move it
     //std::cout << "Z is: " << getY() << std::endl;
+}
+
+int Block::generate_random_index() {
+    static std::random_device rd;
+    static std::mt19937 rng(rd());
+    static std::uniform_int_distribution<int> uni(0, 2);
+
+    return (int) uni(rng);
 }

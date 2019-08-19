@@ -12,13 +12,14 @@ class Vehicle {
 private:
     float x;
     float y;
+    static float speed;
 
 public:
     Vehicle(int pos_x = 0, int pos_y = 0);
     float getX();
     float getY();
     void draw();
-    void move(Direction d, float delta);
+    void move(Direction d, float delta_time);
 };
 
 #endif

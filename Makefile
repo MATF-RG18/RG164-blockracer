@@ -11,25 +11,28 @@ else
 endif
 
 ifeq ($(detected_OS),Linux)
-	CFLAGS		= -g -Wall -Wextra -I/usr/X11R6/include -I/usr/pkg/include 
+	CFLAGS		= -std=c++11 -g -Wall -Wextra -I/usr/X11R6/include -I/usr/pkg/include 
 	LDFLAGS		= -L/usr/X11R6/lib -L/usr/pkg/lib
 endif
 ifeq ($(detected_OS),Darwin)
-	CFLAGS		= -g -Wall -Wextra 
+	CFLAGS		= -std=c++11 -g -Wall -Wextra 
 	LDFLAGS		= -framework OpenGL -framework GLUT -lglut
 endif
 
-$(PROGRAM): main.o vehicle.o grid.o block.o
+$(PROGRAM): main.o vehicle.o grid.o block.o generator.o
 	$(CC) $(CFLAGS) -o $(PROGRAM) *.o $(LDFLAGS)
 
 vehicle.o: Vehicle.cpp Vehicle.h
-	$(CC) $(CFLAGS) -c Vehicle.cpp $(LDFLAGS)
+	$(CC) $(CFLAGS) -c Vehicle.cpp
 
 grid.o: Grid.cpp Grid.h
-	$(CC) $(CFLAGS) -c Grid.cpp $(LDFLAGS)
+	$(CC) $(CFLAGS) -c Grid.cpp
 
 block.o: Block.cpp Block.h
-	$(CC) $(CFLAGS) -c Block.cpp $(LDFLAGS)
+	$(CC) $(CFLAGS) -c Block.cpp
+
+generator.o: Generator.cpp Generator.h
+	$(CC) $(CFLAGS) -c Generator.cpp
 
 
 .PHONY: beauty clean dist
