@@ -29,6 +29,10 @@ float Block::getSpeed() {
     return speed;
 }
 
+void Block::setSpeed(float spd) {
+    speed = spd;
+}
+
 // Metod za pomeranje vozila u levo ili desno
 void Block::move(float delta_time) {
     y -= speed * delta_time;

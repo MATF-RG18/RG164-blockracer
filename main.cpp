@@ -24,9 +24,10 @@ void on_timer(int value);
 
 // Dimenzije prozora
 int window_width, window_height;
-float Block::speed = 10.0;
+float Block::speed = 5.0;
 float Vehicle::speed = 8.0;
 std::chrono::duration<double> last_updated = std::chrono::system_clock::now().time_since_epoch();
+std::chrono::duration<double> start_time = std::chrono::system_clock::now().time_since_epoch();
 
 
 Vehicle yugo = Vehicle(0, 0);
@@ -89,6 +90,15 @@ void on_display(void)
     std::chrono::duration<double> current = std::chrono::system_clock::now().time_since_epoch();
     std::chrono::duration<double> elapsed = current - last_updated;
 
+    if (std::chrono::system_clock::now().time_since_epoch() - start_time > std::chrono::seconds(20))
+        Block::setSpeed(7.0);
+    if (std::chrono::system_clock::now().time_since_epoch() - start_time > std::chrono::seconds(30))
+        Block::setSpeed(10.0);
+    if (std::chrono::system_clock::now().time_since_epoch() - start_time > std::chrono::seconds(40))
+        Block::setSpeed(15.0);
+    if (std::chrono::system_clock::now().time_since_epoch() - start_time > std::chrono::seconds(60))
+        Block::setSpeed(20.0);
+
     mreza.draw();
 
     if (left_key_pressed == true)
@@ -98,6 +108,18 @@ void on_display(void)
     yugo.draw();
 
     generator.generate(blokovi);
+
+    for (auto it = blokovi.begin(); it != blokovi.end(); ) {
+        bool collisionX = (*it)->getX() + 1 >= yugo.getX() - 0.5 &&
+                          yugo.getX() + 0.5 >= (*it)->getX() - 1;
+        bool collisionY = (*it)->getY() + 1 >= yugo.getY() &&
+                          yugo.getY() + 1 >= (*it)->getY();
+
+        if (collisionX && collisionY || (*it)->getY() <= 0)
+            it = blokovi.erase(it);
+        else
+            ++it;
+    }
 
     for (Block* blok : blokovi) {
         blok->move(elapsed.count());

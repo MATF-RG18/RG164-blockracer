@@ -21,6 +21,7 @@ public:
     float getX();
     float getY();
     static float getSpeed();
+    static void setSpeed(float spd);
     void draw();
     void move(float delta_time);
 };

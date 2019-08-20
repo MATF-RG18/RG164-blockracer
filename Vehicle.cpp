@@ -7,7 +7,7 @@ void Vehicle::draw() {
     glPushMatrix();
     glColor3f(0, 0, 1);
     glTranslatef(x, 0.5, y);
-    glScalef(1, 1, 1);
+    //glScalef(1, 1, 1);
     glutSolidCube(1);
     glPopMatrix();
 };
