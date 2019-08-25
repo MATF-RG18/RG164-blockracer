@@ -4,7 +4,6 @@
 #define _VEHICLE_H_
 
 #include <GL/glut.h>
-#include <iostream>
 
 enum Direction { Left_direction, Right_direction };
 

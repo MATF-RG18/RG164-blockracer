@@ -11,15 +11,15 @@ else
 endif
 
 ifeq ($(detected_OS),Linux)
-	CFLAGS		= -std=c++11 -g -Wall -Wextra -I/usr/X11R6/include -I/usr/pkg/include 
-	LDFLAGS		= -L/usr/X11R6/lib -L/usr/pkg/lib
+	CFLAGS		= -std=c++14 -g -Wall -Wextra -I/usr/X11R6/include -I/usr/pkg/include -Wno-c++11-extensions
+	LDFLAGS		= -L/usr/X11R6/lib -L/usr/pkg/lib -lglut -lGLU -lGL
 endif
 ifeq ($(detected_OS),Darwin)
-	CFLAGS		= -std=c++11 -g -Wall -Wextra 
+	CFLAGS		= -std=c++14 -g -Wall -Wextra -Wno-deprecated-declarations -Wno-c++11-extensions
 	LDFLAGS		= -framework OpenGL -framework GLUT -lglut
 endif
 
-$(PROGRAM): main.o vehicle.o grid.o block.o generator.o
+$(PROGRAM): main.o vehicle.o grid.o block.o generator.o image.o
 	$(CC) $(CFLAGS) -o $(PROGRAM) *.o $(LDFLAGS)
 
 vehicle.o: Vehicle.cpp Vehicle.h

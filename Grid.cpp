@@ -1,6 +1,7 @@
 #include "Grid.h"
 
-Grid::Grid(int rep_x, int rep_y) : repeat_x(rep_x), repeat_y(rep_y) {};
+Grid::Grid(int rep_x, int rep_y) : repeat_x(rep_x), repeat_y(rep_y) {
+};
 
 void Grid::draw() {
     // Postavljamo debljinu linija
@@ -14,9 +15,8 @@ void Grid::draw() {
     // Transliramo mrezu da bi centar mreze bio u centru koordinatnog sistema
     glTranslatef(-repeat_x / 2.0, 0, -repeat_y / 2.0);
 
-    int i = 0;
     // Crtamo linije paralelne sa x-osom
-    for (i = 0; i <= repeat_x; i++) {
+    for (int i = 0; i <= repeat_x; i++) {
         // Postavljamo opciju za crtanje linija
         glBegin(GL_LINES);
         // Crtamo pocetnu tacku
@@ -27,7 +27,7 @@ void Grid::draw() {
     }
 
     // Crtamo linije paralelne sa z-osom
-    for (i = 0; i <= repeat_y; i++) {
+    for (int i = 0; i <= repeat_y; i++) {
         // Postavljamo opciju za crtanje linija
         glBegin(GL_LINES);
         // Crtamo pocetnu tacku

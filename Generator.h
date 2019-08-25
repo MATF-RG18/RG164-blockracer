@@ -4,11 +4,9 @@
 #define _GENERATOR_H_
 
 #include <GL/glut.h>
-#include <vector>
 #include <list>
 #include <chrono>
 #include <random>
-#include <iostream>
 #include "Block.h"
 
 class Generator {

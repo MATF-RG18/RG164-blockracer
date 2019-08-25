@@ -4,11 +4,10 @@
 #define _GRID_H_
 
 #include <GL/glut.h>
-#include <iostream>
-
 
 class Grid {
 private:
+    // Broj ponavljanja linija po x i y osi (zapravo x i z, gledajuci u okviru OpenGL-a)
     int repeat_x;
     int repeat_y;
 

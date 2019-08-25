@@ -9,10 +9,15 @@
 
 class Block {
 private:
+    // Koordinate bloka
     float x;
     float y;
+    // Tri moguce x-koordinate novogenerisanih blokova
     const float column_x[3] = {-2.5, 0, 2.5};
+    // Brzina kretanja
     static float speed;
+    // Pomocni metod za generisanje nasumicnog indeksa
+    // za biranje x-kordinate pri instanciranju novog bloka
     static int generate_random_index();
 
 public:

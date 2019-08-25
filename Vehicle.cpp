@@ -7,7 +7,6 @@ void Vehicle::draw() {
     glPushMatrix();
     glColor3f(0, 0, 1);
     glTranslatef(x, 0.5, y);
-    //glScalef(1, 1, 1);
     glutSolidCube(1);
     glPopMatrix();
 };
@@ -32,5 +31,4 @@ void Vehicle::move(Direction d, float delta_time) {
         x = 3;
     if (x < -3)
         x= -3;
-    //std::cout << "X is: " << getX() << std::endl;
 }

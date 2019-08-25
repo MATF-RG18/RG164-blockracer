@@ -1,11 +1,12 @@
 #include "Generator.h"
 
 Generator::Generator() {
+    // Postavljamo inicijalno vreme sledeceg generisanja bloka (za prvi blok)
     next_spawn_time = std::chrono::system_clock::now().time_since_epoch();
 };
 
+// Metod koji generise blokove i dodaje ih u listu
 void Generator::generate(std::list<Block*> &block_array) {
-    std::cout << "Velicina: " << block_array.size() << std::endl;
     if (block_array.size() < 40) {
         if (std::chrono::system_clock::now().time_since_epoch() >= next_spawn_time) {
 

@@ -36,8 +36,6 @@ void Block::setSpeed(float spd) {
 // Metod za pomeranje vozila u levo ili desno
 void Block::move(float delta_time) {
     y -= speed * delta_time;
-    // if y < -1 delete object or move it
-    //std::cout << "Z is: " << getY() << std::endl;
 }
 
 int Block::generate_random_index() {
