@@ -1,6 +1,7 @@
 # BlockRacer
 
-![Screenshot](screenshots/6.png)
+[![Screenshot](screenshots/6.png)](screenshots/6.mp4)
+
 
 BlockRacer je igra inspirisana igrom AudioSurf.
 
